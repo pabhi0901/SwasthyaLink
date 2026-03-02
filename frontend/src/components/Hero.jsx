@@ -1,8 +1,11 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import Button from './Button'
 import ImageCarousel from './ImageCarousel'
 
 const Hero = () => {
+  const navigate = useNavigate()
+
   // Healthcare images - can add more later
   const carouselImages = [
     'https://ik.imagekit.io/cdsjgzx6p/swasthyalink_extras/dab93888-410d-401a-9187-4b175c194484.jpg',
@@ -48,7 +51,7 @@ const Hero = () => {
               <Button 
                 variant="primary" 
                 size="md"
-                onClick={() => window.location.href = '/appointments'}
+                onClick={() => navigate('/appointments')}
                 icon={
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -60,7 +63,7 @@ const Hero = () => {
               <Button 
                 variant="secondary" 
                 size="md"
-                onClick={() => window.location.href = '/services'}
+                onClick={() => navigate('/services')}
                 icon={
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
