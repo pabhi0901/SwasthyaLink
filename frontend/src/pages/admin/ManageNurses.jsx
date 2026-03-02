@@ -9,7 +9,7 @@ import AvailabilityPanel from './manageNurses/AvailabilityPanel'
 import NursesOnLeavePanel from './manageNurses/NursesOnLeavePanel'
 import PlaceholderPanel from './manageNurses/PlaceholderPanel'
 
-const API_BASE = 'http://localhost:5003/api'
+const API_BASE = `${import.meta.env.VITE_API_URL}/api`
 const PAGE_LIMIT = 6
 const ASSIGNMENT_LIMIT = 5
 

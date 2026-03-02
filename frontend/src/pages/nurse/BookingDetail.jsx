@@ -47,7 +47,7 @@ const BookingDetail = () => {
         console.log("Ruun hai ji");
         
         const res = await axios.get(
-          `http://localhost:5003/api/nurse/booking/${bookingId}`,
+          `${import.meta.env.VITE_API_URL}/api/nurse/booking/${bookingId}`,
           { withCredentials: true }
         )
         if (res.data) {
@@ -71,7 +71,7 @@ const BookingDetail = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get('http://localhost:5003/api/auth/me', { withCredentials: true })
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/me`, { withCredentials: true })
         if (res.data.success) {
           const userId = res.data.user.id || res.data.user._id
           setMyUserId(userId)
@@ -148,7 +148,7 @@ const BookingDetail = () => {
 
     try {
       const res = await axios.get(
-        `http://localhost:5003/api/messages/chat/${bookingId}?page=${page}`,
+        `${import.meta.env.VITE_API_URL}/api/messages/chat/${bookingId}?page=${page}`,
         { withCredentials: true }
       )
 
@@ -233,7 +233,7 @@ const BookingDetail = () => {
     setActionLoading(true)
     try {
       const res = await axios.patch(
-        `http://localhost:5003/api/nurse/booking/${bookingId}/complete`,
+        `${import.meta.env.VITE_API_URL}/api/nurse/booking/${bookingId}/complete`,
         {},
         { withCredentials: true }
       )

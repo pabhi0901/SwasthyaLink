@@ -22,7 +22,7 @@ const ConfirmedOrders = () => {
     setError('')
     try {
       const response = await axios.get(
-        `http://localhost:5003/api/nurse/pending-bookings?page=${page}&limit=10`,
+        `${import.meta.env.VITE_API_URL}/api/nurse/pending-bookings?page=${page}&limit=10`,
         { withCredentials: true }
       )
       if (response.data.success) {

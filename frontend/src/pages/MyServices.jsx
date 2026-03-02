@@ -23,7 +23,7 @@ const MyServices = () => {
     setError('')
 
     try {
-      let url = `http://localhost:5003/api/booking/user-bookings?page=${currentPage}&limit=${itemsPerPage}`
+      let url = `${import.meta.env.VITE_API_URL}/api/booking/user-bookings?page=${currentPage}&limit=${itemsPerPage}`
       
       if (filter !== 'all') {
         url += `&status=${filter}`

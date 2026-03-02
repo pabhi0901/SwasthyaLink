@@ -99,7 +99,7 @@ const AddService = () => {
       })
 
       const response = await axios.post(
-        'http://localhost:5003/api/services/createService',
+        `${import.meta.env.VITE_API_URL}/api/services/createService`,
         formData,
         {
           withCredentials: true,

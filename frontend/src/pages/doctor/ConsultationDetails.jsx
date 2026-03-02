@@ -40,7 +40,7 @@ const ConsultationDetails = () => {
     try {
       // Fetch consultation details from active consultations endpoint
       const consultationsResponse = await axios.get(
-        'http://localhost:5003/api/doctor/my-active-consultations',
+        `${import.meta.env.VITE_API_URL}/api/doctor/my-active-consultations`,
         { withCredentials: true }
       )
 
@@ -60,7 +60,7 @@ const ConsultationDetails = () => {
 
       // Fetch confirmed appointments
       const appointmentsResponse = await axios.get(
-        `http://localhost:5003/api/doctor/consultation/${consultationId}/confirmed-appointments`,
+        `${import.meta.env.VITE_API_URL}/api/doctor/consultation/${consultationId}/confirmed-appointments`,
         { withCredentials: true }
       )
 

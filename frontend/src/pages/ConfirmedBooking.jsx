@@ -56,7 +56,7 @@ const ConfirmedBooking = () => {
     try {
       // Fetch booking details (includes service and nurse details)
       const bookingResponse = await axios.get(
-        `http://localhost:5003/api/booking/${bookingId}`,
+        `${import.meta.env.VITE_API_URL}/api/booking/${bookingId}`,
         { withCredentials: true }
       )
 
@@ -68,7 +68,7 @@ const ConfirmedBooking = () => {
       }
 
       // Get current user ID
-      const authCheck = await axios.get('http://localhost:5003/api/auth/me', {
+      const authCheck = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/me`, {
         withCredentials: true
       })
       if (authCheck.data.success && authCheck.data.user) {
@@ -182,7 +182,7 @@ const ConfirmedBooking = () => {
     setChatLoading(true)
     try {
       const response = await axios.get(
-        `http://localhost:5003/api/messages/chat/${bookingId}?page=${page}`,
+        `${import.meta.env.VITE_API_URL}/api/messages/chat/${bookingId}?page=${page}`,
         { withCredentials: true }
       )
 

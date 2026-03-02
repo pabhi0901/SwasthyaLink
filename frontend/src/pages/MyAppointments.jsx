@@ -39,7 +39,7 @@ const MyAppointments = () => {
     setError('')
 
     try {
-      let url = `http://localhost:5003/api/appointment/my-appointments?page=${currentPage}&limit=${itemsPerPage}`
+      let url = `${import.meta.env.VITE_API_URL}/api/appointment/my-appointments?page=${currentPage}&limit=${itemsPerPage}`
       
       if (filter !== 'all') {
         url += `&status=${filter}`

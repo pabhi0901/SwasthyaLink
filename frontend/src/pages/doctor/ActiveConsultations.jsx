@@ -37,7 +37,7 @@ const ActiveConsultations = () => {
     
     try {
       const response = await axios.get(
-        'http://localhost:5003/api/doctor/my-active-consultations',
+        `${import.meta.env.VITE_API_URL}/api/doctor/my-active-consultations`,
         { withCredentials: true }
       )
 
@@ -78,7 +78,7 @@ const ActiveConsultations = () => {
     
     try {
       const response = await axios.patch(
-        'http://localhost:5003/api/doctor/update-consultation-status',
+        `${import.meta.env.VITE_API_URL}/api/doctor/update-consultation-status`,
         {
           consultationId,
           isActive: false

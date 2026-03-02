@@ -12,7 +12,7 @@ const DoctorNavbar = () => {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get('http://localhost:5003/api/auth/me', {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/me`, {
         withCredentials: true
       })
       if (response.status === 200) {
@@ -35,7 +35,7 @@ const DoctorNavbar = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:5003/api/auth/logout', {}, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/logout`, {}, {
         withCredentials: true
       })
       navigate('/login')

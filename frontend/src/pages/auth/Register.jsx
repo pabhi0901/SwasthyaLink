@@ -61,7 +61,7 @@ const Register = () => {
     setError('')
 
     try {
-      const response = await axios.post('http://localhost:5003/api/auth/register', {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
         name: formData.name,
         email: formData.email,
         phone: formData.phone,

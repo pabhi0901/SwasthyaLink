@@ -125,7 +125,7 @@ const RegisterNurse = () => {
     
     try {
       const response = await axios.post(
-        'http://localhost:5003/api/auth/create-nurse',
+        `${import.meta.env.VITE_API_URL}/api/auth/create-nurse`,
         nurseData,
         {
           withCredentials: true
@@ -155,7 +155,7 @@ const RegisterNurse = () => {
     
     try {
       const response = await axios.post(
-        'http://localhost:5003/api/admin/nurse-time-shift',
+        `${import.meta.env.VITE_API_URL}/api/admin/nurse-time-shift`,
         {
           nurseId,
           startHour: parseInt(shiftData.startHour),
@@ -189,8 +189,8 @@ const RegisterNurse = () => {
     
     try {
       const endpoint = search 
-        ? `http://localhost:5003/api/services/search?search=${encodeURIComponent(search)}&page=${page}&limit=10`
-        : `http://localhost:5003/api/services/?page=${page}&limit=10`
+        ? `${import.meta.env.VITE_API_URL}/api/services/search?search=${encodeURIComponent(search)}&page=${page}&limit=10`
+        : `${import.meta.env.VITE_API_URL}/api/services/?page=${page}&limit=10`
       
       const response = await axios.get(endpoint, {
         withCredentials: true
@@ -238,7 +238,7 @@ const RegisterNurse = () => {
       // Assign each selected service to the nurse
       const assignPromises = selectedServices.map(serviceId =>
         axios.post(
-          'http://localhost:5003/api/admin/assign-service',
+          `${import.meta.env.VITE_API_URL}/api/admin/assign-service`,
           {
             nurseId,
             serviceId,

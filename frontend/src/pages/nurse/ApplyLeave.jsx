@@ -24,7 +24,7 @@ const ApplyLeave = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get('http://localhost:5003/api/auth/me', { withCredentials: true })
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/me`, { withCredentials: true })
         if (res.data.success) {
           setNurseId(res.data.user.id || res.data.user._id)
         }
@@ -44,7 +44,7 @@ const ApplyLeave = () => {
     setLeavesLoading(true)
     try {
       const res = await axios.get(
-        `http://localhost:5003/api/nurse/leaves?page=${page}&limit=10`,
+        `${import.meta.env.VITE_API_URL}/api/nurse/leaves?page=${page}&limit=10`,
         { withCredentials: true }
       )
       if (res.data.success) {
@@ -107,7 +107,7 @@ const ApplyLeave = () => {
     setSubmitting(true)
     try {
       const res = await axios.post(
-        `http://localhost:5003/api/nurse/applyLeave/${nurseId}`,
+        `${import.meta.env.VITE_API_URL}/api/nurse/applyLeave/${nurseId}`,
         { startDate, endDate, reason: reason.trim() },
         { withCredentials: true }
       )

@@ -77,8 +77,8 @@ const registerUser = async(req, res) => {
 
     res.cookie("token", token, {
         httpOnly: true,
-        sameSite: "lax", //none in production
-        secure: false, // Set to true in production with HTTPS
+        sameSite: "none", //none in production and lax in local development
+        secure: true, // Set to true in production with HTTPS,false in local development
         maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     })
 
@@ -126,8 +126,7 @@ const loginUser = async(req, res) => {
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password)
-    console.log("Password match: ", passwordMatch);
-    console.log("password",password)
+   
     if(!passwordMatch){
         return res.status(400).json({
             mess:"Invalidation"
@@ -142,8 +141,8 @@ const loginUser = async(req, res) => {
 
     res.cookie("token", token, {
         httpOnly: true,
-        sameSite: "lax", //none in production with https
-        secure: false, // Set to true in production with HTTPS
+        sameSite: "none", //none in production with https,lax in local development
+        secure: true, // Set to true in production with HTTPS,false in local development
         maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     })
 

@@ -23,7 +23,7 @@ const ConsultationDetail = () => {
   const fetchConsultationDetails = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:5003/api/doctor/search-consultations?search=',
+        `${import.meta.env.VITE_API_URL}/api/doctor/search-consultations?search=`,
         { withCredentials: true }
       )
 
@@ -53,7 +53,7 @@ const ConsultationDetail = () => {
     try {
       console.log('Fetching slots for consultationId:', consultationId)
       const response = await axios.get(
-        `http://localhost:5003/api/appointment/available-slots/${consultationId}`,
+        `${import.meta.env.VITE_API_URL}/api/appointment/available-slots/${consultationId}`,
         { withCredentials: true }
       )
 
@@ -75,7 +75,7 @@ const ConsultationDetail = () => {
   const handleBookClick = async () => {
     // Check if user is logged in
     try {
-      await axios.get('http://localhost:5003/api/auth/me', { withCredentials: true })
+      await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/me`, { withCredentials: true })
       // If logged in, fetch slots
       fetchAvailableSlots()
     } catch (err) {
@@ -138,7 +138,7 @@ const ConsultationDetail = () => {
     try {
       // Step 1: Create appointment (returns appointment and payment details)
       const response = await axios.post(
-        'http://localhost:5003/api/appointment/create-appointment',
+        `${import.meta.env.VITE_API_URL}/api/appointment/create-appointment`,
         {
           consultationId: consultationId,
           slotId: selectedSlot._id
@@ -163,7 +163,7 @@ const ConsultationDetail = () => {
             try {
               console.log('Payment successful, confirming appointment...')
               const confirmResponse = await axios.post(
-                'http://localhost:5003/api/appointment/confirm-appointment',
+                `${import.meta.env.VITE_API_URL}/api/appointment/confirm-appointment`,
                 {
                   appointmentId: appointmentId,
                   razorpayOrderId: orderId,

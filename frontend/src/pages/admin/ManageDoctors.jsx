@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { FiSearch, FiRefreshCcw, FiMail, FiPhone, FiUser } from 'react-icons/fi'
 
-const API_BASE = 'http://localhost:5003/api'
+const API_BASE = `${import.meta.env.VITE_API_URL}/api`
 const DOCTORS_LIMIT = 12
 
 const ManageDoctors = () => {

@@ -42,7 +42,7 @@ const ServiceDetail = () => {
   const fetchServiceDetails = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5003/api/services/${serviceId}`,
+        `${import.meta.env.VITE_API_URL}/api/services/${serviceId}`,
         { withCredentials: true }
       )
 
@@ -60,7 +60,7 @@ const ServiceDetail = () => {
   const fetchUserAddresses = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:5003/api/auth/addresses',
+        `${import.meta.env.VITE_API_URL}/api/auth/addresses`,
         { withCredentials: true }
       )
       if (response.data.success) {
@@ -89,7 +89,7 @@ const ServiceDetail = () => {
 
     // Check if user is logged in
     try {
-      const authCheck = await axios.get('http://localhost:5003/api/auth/me', {
+      const authCheck = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/me`, {
         withCredentials: true
       })
       
@@ -140,7 +140,7 @@ const ServiceDetail = () => {
       }
 
       const response = await axios.post(
-        'http://localhost:5003/api/booking/create',
+        `${import.meta.env.VITE_API_URL}/api/booking/create`,
         bookingData,
         { withCredentials: true }
       )
@@ -160,7 +160,7 @@ const ServiceDetail = () => {
             try {
               // Verify payment
               const verifyResponse = await axios.post(
-                'http://localhost:5003/api/booking/verify-payment',
+                `${import.meta.env.VITE_API_URL}/api/booking/verify-payment`,
                 {
                   razorpayOrderId: payment.id,
                   paymentId: paymentResponse.razorpay_payment_id,

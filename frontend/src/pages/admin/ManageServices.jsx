@@ -8,7 +8,7 @@ import ServicePlaceholderPanel from './manageServices/ServicePlaceholderPanel'
 import ServiceAssignmentsPanel from './manageServices/ServiceAssignmentsPanel'
 import ServiceBookingsPanel from './manageServices/ServiceBookingsPanel'
 
-const API_BASE = 'http://localhost:5003/api'
+const API_BASE = `${import.meta.env.VITE_API_URL}/api`
 const SERVICE_LIMIT = 8
 const MAX_SERVICE_IMAGES = 5
 const ASSIGNMENTS_LIMIT = 6

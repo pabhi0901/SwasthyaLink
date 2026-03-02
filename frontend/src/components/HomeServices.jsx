@@ -14,7 +14,7 @@ const HomeServices = () => {
   const fetchServices = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:5003/api/services?limit=3',
+        `${import.meta.env.VITE_API_URL}/api/services?limit=3`,
         { withCredentials: true }
       )
 

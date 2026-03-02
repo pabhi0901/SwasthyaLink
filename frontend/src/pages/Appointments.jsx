@@ -58,7 +58,7 @@ const Appointments = () => {
     setError('')
 
     try {
-      let url = 'http://localhost:5003/api/doctor'
+      let url = `${import.meta.env.VITE_API_URL}/api/doctor`
       
       if (searchQuery && searchQuery.trim()) {
         url += `/search-consultations?search=${encodeURIComponent(searchQuery)}&page=${currentPage}&limit=${itemsPerPage}`

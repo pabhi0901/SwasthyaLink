@@ -17,7 +17,7 @@ const AppointmentDetail = () => {
   const fetchAppointmentDetails = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5003/api/appointment/${appointmentId}`,
+        `${import.meta.env.VITE_API_URL}/api/appointment/${appointmentId}`,
         { withCredentials: true }
       )
 

@@ -32,7 +32,7 @@ const ConfirmedAppointment = () => {
   const fetchAppointmentDetails = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5003/api/appointment/${appointmentId}`,
+        `${import.meta.env.VITE_API_URL}/api/appointment/${appointmentId}`,
         { withCredentials: true }
       )
 
@@ -55,7 +55,7 @@ const ConfirmedAppointment = () => {
     }
     try {
       const response = await axios.get(
-        `http://localhost:5003/api/appointment/prescription/${appointmentId}`,
+        `${import.meta.env.VITE_API_URL}/api/appointment/prescription/${appointmentId}`,
         { withCredentials: true }
       )
       if (response.data.success) {
@@ -475,7 +475,7 @@ const VideoCallInterface = ({ appointmentId, appointment, onLeave }) => {
   const fetchVideoToken = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5003/api/appointment/video-call-token/${appointmentId}`,
+        `${import.meta.env.VITE_API_URL}/api/appointment/video-call-token/${appointmentId}`,
         { withCredentials: true }
       )
       setToken(response.data.token)

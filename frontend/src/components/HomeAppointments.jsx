@@ -16,7 +16,7 @@ const HomeAppointments = () => {
       console.log('HomeAppointments: Fetching consultations...')
       // Empty search returns all active consultations
       const response = await axios.get(
-        'http://localhost:5003/api/doctor/search-consultations?search=',
+        `${import.meta.env.VITE_API_URL}/api/doctor/search-consultations?search=`,
         { withCredentials: true }
       )
 

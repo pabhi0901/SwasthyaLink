@@ -78,7 +78,7 @@ const RegisterDoctor = () => {
     
     try {
       const response = await axios.post(
-        'http://localhost:5003/api/auth/create-doctor',
+        `${import.meta.env.VITE_API_URL}/api/auth/create-doctor`,
         doctorData,
         {
           withCredentials: true

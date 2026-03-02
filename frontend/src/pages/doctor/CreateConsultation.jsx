@@ -83,7 +83,7 @@ const CreateConsultation = () => {
       })
 
       const response = await axios.post(
-        'http://localhost:5003/api/doctor/create-consultation',
+        `${import.meta.env.VITE_API_URL}/api/doctor/create-consultation`,
         formDataToSend,
         {
           withCredentials: true,
@@ -124,7 +124,7 @@ const CreateConsultation = () => {
 
     try {
       const response = await axios.patch(
-        'http://localhost:5003/api/doctor/confirm-consultation',
+        `${import.meta.env.VITE_API_URL}/api/doctor/confirm-consultation`,
         {
           consultationId: consultation._id,
           freeSlots: slotsToRemove

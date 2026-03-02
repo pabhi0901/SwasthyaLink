@@ -37,7 +37,7 @@ const InactiveConsultationDetails = () => {
 
     try {
       const response = await axios.get(
-        `http://localhost:5003/api/doctor/consultation/${id}/completed-appointments`,
+        `${import.meta.env.VITE_API_URL}/api/doctor/consultation/${id}/completed-appointments`,
         { withCredentials: true }
       )
 

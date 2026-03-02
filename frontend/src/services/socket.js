@@ -6,7 +6,7 @@ export const initSocket = () => {
   if (socket) return socket
 
   // Connect to backend socket server
-  socket = io('http://localhost:5003', {
+  socket = io(import.meta.env.VITE_API_URL, {
     withCredentials: true,
     autoConnect: false
   })

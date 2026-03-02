@@ -55,7 +55,7 @@ const Services = () => {
     setError('')
 
     try {
-      let url = 'http://localhost:5003/api/services'
+      let url = `${import.meta.env.VITE_API_URL}/api/services`
       
       if (searchQuery && searchQuery.trim()) {
         // Use search endpoint

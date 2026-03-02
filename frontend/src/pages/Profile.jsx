@@ -37,7 +37,7 @@ const Profile = () => {
 
   const checkAuthStatus = async () => {
     try {
-      const response = await axios.get('http://localhost:5003/api/auth/me', { withCredentials: true })
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/me`, { withCredentials: true })
       if (response.data.success && response.data.user) {
         setIsLoggedIn(true)
         setUser(response.data.user)
@@ -55,7 +55,7 @@ const Profile = () => {
 
   const fetchAddresses = async () => {
     try {
-      const response = await axios.get('http://localhost:5003/api/auth/addresses', { withCredentials: true })
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/auth/addresses`, { withCredentials: true })
       if (response.data.success) {
         setAddresses(response.data.addresses || [])
       }
@@ -66,7 +66,7 @@ const Profile = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:5003/api/auth/logout', {}, { withCredentials: true })
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/logout`, {}, { withCredentials: true })
       disconnectSocket()
       setIsLoggedIn(false)
       setUser(null)
@@ -85,7 +85,7 @@ const Profile = () => {
     formData.append('image', file)
 
     try {
-      const response = await axios.put('http://localhost:5003/api/auth/profile/image', formData, {
+      const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/auth/profile/image`, formData, {
         withCredentials: true,
         headers: { 'Content-Type': 'multipart/form-data' }
       })
@@ -103,7 +103,7 @@ const Profile = () => {
   const handleUpdateProfile = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.put('http://localhost:5003/api/auth/profile', editProfileForm, {
+      const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/auth/profile`, editProfileForm, {
         withCredentials: true,
         headers: { 'Content-Type': 'application/json' }
       })
@@ -124,7 +124,7 @@ const Profile = () => {
       return
     }
     try {
-      const response = await axios.put('http://localhost:5003/api/auth/profile/password', 
+      const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/auth/profile/password`, 
         { currentPassword: passwordForm.currentPassword, newPassword: passwordForm.newPassword, confirmPassword: passwordForm.confirmPassword },
         { withCredentials: true, headers: { 'Content-Type': 'application/json' } }
       )
@@ -141,7 +141,7 @@ const Profile = () => {
   const handleAddAddress = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://localhost:5003/api/auth/address', addressForm, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/address`, addressForm, {
         withCredentials: true,
         headers: { 'Content-Type': 'application/json' }
       })
@@ -159,7 +159,7 @@ const Profile = () => {
   const handleEditAddress = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.put(`http://localhost:5003/api/auth/address/${selectedAddress._id}`, addressForm, {
+      const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/auth/address/${selectedAddress._id}`, addressForm, {
         withCredentials: true,
         headers: { 'Content-Type': 'application/json' }
       })
@@ -177,7 +177,7 @@ const Profile = () => {
   const handleDeleteAddress = async (addressId) => {
     if (!window.confirm('Are you sure you want to delete this address?')) return
     try {
-      const response = await axios.delete(`http://localhost:5003/api/auth/address/${addressId}`, { withCredentials: true })
+      const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/auth/address/${addressId}`, { withCredentials: true })
       if (response.data.success) {
         fetchAddresses()
         alert('Address deleted successfully!')

@@ -76,7 +76,7 @@ const AppointmentDetail = () => {
     if (markingComplete || appointmentCompleted) return
     setMarkingComplete(true)
     try {
-      await axios.patch('http://localhost:5003/api/appointment/mark-completed', { appointmentId }, { withCredentials: true })
+      await axios.patch(`${import.meta.env.VITE_API_URL}/api/appointment/mark-completed`, { appointmentId }, { withCredentials: true })
       setAppointmentCompleted(true)
       setAppointment(prev => prev ? { ...prev, status: 'COMPLETED' } : prev)
     } catch (err) {
@@ -93,7 +93,7 @@ const AppointmentDetail = () => {
     try {
       // Fetch all consultations to find the appointment
       const consultationsResponse = await axios.get(
-        'http://localhost:5003/api/doctor/my-active-consultations',
+        `${import.meta.env.VITE_API_URL}/api/doctor/my-active-consultations`,
         { withCredentials: true }
       )
 
@@ -103,7 +103,7 @@ const AppointmentDetail = () => {
         // Search through all consultations for appointments
         for (const consultation of consultationsResponse.data.consultations) {
           const appointmentsResponse = await axios.get(
-            `http://localhost:5003/api/doctor/consultation/${consultation._id}/confirmed-appointments`,
+            `${import.meta.env.VITE_API_URL}/api/doctor/consultation/${consultation._id}/confirmed-appointments`,
             { withCredentials: true }
           )
           
@@ -140,7 +140,7 @@ const AppointmentDetail = () => {
     
     try {
       const response = await axios.get(
-        `http://localhost:5003/api/doctor/patient/${appointment.patientId._id}/prescriptions`,
+        `${import.meta.env.VITE_API_URL}/api/doctor/patient/${appointment.patientId._id}/prescriptions`,
         { withCredentials: true }
       )
 
@@ -694,7 +694,7 @@ const PrescriptionFormModal = ({ appointment, formData, setFormData, onHide, onS
     try {
       const patientId = appointment.patientId?._id || appointment.patientId
       const appointmentId = appointment._id
-      await axios.post('http://localhost:5003/api/doctor/add-prescription', {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/doctor/add-prescription`, {
         patientId, appointmentId, diagnosis, additionalNotes,
         followUpDate: followUpDate || undefined, medicines
       }, { withCredentials: true })
@@ -948,7 +948,7 @@ const VideoCallInterface = ({ appointmentId, appointment, onLeave, contained = f
   const fetchVideoToken = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5003/api/appointment/video-call-token/${appointmentId}`,
+        `${import.meta.env.VITE_API_URL}/api/appointment/video-call-token/${appointmentId}`,
         { withCredentials: true }
       )
       setToken(response.data.token)
