@@ -77,8 +77,9 @@ const registerUser = async(req, res) => {
 
     res.cookie("token", token, {
         httpOnly: true,
-        sameSite: "none", //none in production and lax in local development
-        secure: true, // Set to true in production with HTTPS,false in local development
+        sameSite: "none",
+        secure: true,
+        path: "/",
         maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     })
 
@@ -119,9 +120,9 @@ const loginUser = async(req, res) => {
     const user = await userModel.findOne({ email }).select("+password")
 
     if(!user){
-
         return res.status(400).json({
-            mess:"Invalid email or password"
+            success: false,
+            message: "Invalid email or password"
         })
     }
 
@@ -129,7 +130,8 @@ const loginUser = async(req, res) => {
    
     if(!passwordMatch){
         return res.status(400).json({
-            mess:"Invalidation"
+            success: false,
+            message: "Invalid email or password"
         })
     }
 
@@ -141,8 +143,9 @@ const loginUser = async(req, res) => {
 
     res.cookie("token", token, {
         httpOnly: true,
-        sameSite: "none", //none in production with https,lax in local development
-        secure: true, // Set to true in production with HTTPS,false in local development
+        sameSite: "none",
+        secure: true,
+        path: "/",
         maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
     })
 
@@ -165,7 +168,7 @@ const loginUser = async(req, res) => {
         console.log(err);
         return res.status(500).json({
             success:false,
-            mess:"Internal Server Error"
+            message: err.message || "Internal Server Error"
         })
     }
 }
@@ -227,7 +230,7 @@ const registerNurse = async(req,res)=>{
         console.log(err);
         return res.status(500).json({
             success:false,
-            mess:"Internal Server Error"
+            message: err.message || "Internal Server Error"
         })
         
     }
@@ -589,11 +592,12 @@ const changePassword = async (req, res) => {
 // Logout user
 const logout = async (req, res) => {
     try {
-        // Clear the JWT cookie
+        // Clear the JWT cookie with matching attributes
         res.clearCookie("token", {
             httpOnly: true,
-            sameSite: "lax",
-            secure: false
+            sameSite: "none",
+            secure: true,
+            path: "/"
         });
 
         res.status(200).json({

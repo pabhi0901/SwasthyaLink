@@ -139,7 +139,7 @@ const RegisterNurse = () => {
       }
     } catch (err) {
       console.error('Registration error:', err)
-      setError(err.response?.data?.message || 'Failed to register nurse')
+      setError(err.response?.data?.message || err.response?.data?.mess || err.message || 'Failed to register nurse')
     } finally {
       setLoading(false)
     }

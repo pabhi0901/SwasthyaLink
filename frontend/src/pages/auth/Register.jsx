@@ -80,11 +80,12 @@ const Register = () => {
         // Navigate based on user type
         navigate('/')
       } else {
-        setError(data.message || 'Registration failed')
+        setError(data.message || data.mess || 'Registration failed')
       }
     } catch (err) {
       console.error('Registration error:', err)
-      setError('An error occurred. Please try again.')
+      const serverMessage = err.response?.data?.message || err.response?.data?.mess || err.message || 'An error occurred. Please try again.'
+      setError(serverMessage)
     } finally {
       setIsLoading(false)
     }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { disconnectSocket } from '../services/socket'
 import Button from './Button'
 
 const Navbar = () => {
@@ -39,6 +40,7 @@ const Navbar = () => {
       await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/logout`, {}, {
         withCredentials: true
       })
+      disconnectSocket()
       setIsLoggedIn(false)
       setUser(null)
       navigate('/')

@@ -63,11 +63,12 @@ const Login = () => {
           navigate('/')
         }
       } else {
-        setError(data.message || 'Login failed')
+        setError(data.message || data.mess || 'Login failed')
       }
     } catch (err) {
       console.error('Login error:', err)
-      setError('An error occurred. Please try again.')
+      const serverMessage = err.response?.data?.message || err.response?.data?.mess || err.message || 'An error occurred. Please try again.'
+      setError(serverMessage)
     } finally {
       setIsLoading(false)
     }

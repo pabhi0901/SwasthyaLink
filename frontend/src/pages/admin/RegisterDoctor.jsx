@@ -91,7 +91,7 @@ const RegisterDoctor = () => {
       }
     } catch (err) {
       console.error('Registration error:', err)
-      setError(err.response?.data?.message || 'Failed to register doctor')
+      setError(err.response?.data?.message || err.response?.data?.mess || err.message || 'Failed to register doctor')
     } finally {
       setLoading(false)
     }
