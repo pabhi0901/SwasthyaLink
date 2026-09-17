@@ -74,6 +74,9 @@ const Register = () => {
       const data = response.data
 
       if (data.success) {
+        if (data.token) {
+          localStorage.setItem('authToken', data.token);
+        }
         // Connect to socket after successful registration
         connectSocket()
         

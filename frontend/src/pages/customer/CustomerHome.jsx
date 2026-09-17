@@ -16,10 +16,9 @@ const CustomerHome = () => {
       <MedicalDepartments />
       <PatientJourney />
       <HomeServices />
-        <AIAssistance />
+      <AIAssistance />
       <HomeAppointments />
       <VideoReelSection />
-    
     </MainLayout>
   )
 }

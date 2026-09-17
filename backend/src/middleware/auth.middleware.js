@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken"
 export const authCreatorFunction = (role) => {
   return async (req, res, next) => {
     try {
-      const token = req.cookies.token
+      const token = req.cookies?.token || req.headers?.authorization?.replace("Bearer ", "");
 
       if (!token) {
         return res.status(401).json({

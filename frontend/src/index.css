@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "@fontsource/caveat/600.css";
+@import "@fontsource/caveat/700.css";
 @import "tailwindcss";
+
+.font-handwritten {
+  font-family: 'Caveat', cursive, sans-serif !important;
+}
 
 @theme {
   --font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;

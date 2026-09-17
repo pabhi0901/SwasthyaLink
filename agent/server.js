@@ -1,17 +1,19 @@
-import app from "./src/app.js"
-import dotenv from "dotenv"
-dotenv.config()
-import connectDB from "./src/db/db.js"
+import app from "./src/app.js";
+import dotenv from "dotenv";
+dotenv.config();
+if (!process.env.JWT_SECRET) {
+  dotenv.config({ path: "./src/.env" });
+}
+
+import connectToDB from "./src/db/db.js";
 import { createServer } from "http";
 import { Server } from "socket.io";
-
-import registerAllFunctions from "./src/socket/socketIndex.js"
+import registerAllFunctions from "./src/socket/socketIndex.js";
 
 const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:3001',
   'http://localhost:3002',
-  'http://localhost:5005',
   'http://localhost:5173',
   process.env.frontendURL ? process.env.frontendURL.replace(/\/$/, '') : null,
   "https://swasthyalink-two.vercel.app",
@@ -34,13 +36,12 @@ const io = new Server(httpServer, {
   }
 });
 
-registerAllFunctions(io)
+registerAllFunctions(io);
 
-connectDB()
+connectToDB();
 
-const port = process.env.PORT || 5001
+const PORT = process.env.PORT || 5005;
 
-httpServer.listen(port,()=>{
-    console.log(`Server is running on port ${process.env.PORT}`)
+httpServer.listen(PORT, () => {
+  console.log(`Agent service is running on port ${PORT}`);
 });
-

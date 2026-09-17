@@ -86,6 +86,7 @@ const registerUser = async(req, res) => {
     res.status(201).json({
         success: true,
         message: "User registered successfully",
+        token,
         user:{
             user:user.name,
             email:user.email,
@@ -152,6 +153,7 @@ const loginUser = async(req, res) => {
     res.status(201).json({
         success: true,
         message: "User logged in successfully",
+        token,
         user:{
             user:user.name,
             email:user.email,
@@ -628,9 +630,12 @@ const getCurrentUser = async (req, res) => {
             });
         }
 
+        const token = req.cookies?.token || req.headers?.authorization?.replace("Bearer ", "");
+
         res.status(200).json({
             success: true,
             message: "User profile fetched successfully",
+            token,
             user: {
                 id: user._id,
                 name: user.name,

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import CustomerHome from './pages/customer/CustomerHome'
 import DoctorDashboard from './pages/doctor/DoctorDashboard'
 import NurseDashboard from './pages/nurse/NurseDashboard'
@@ -16,6 +16,7 @@ import ConfirmedBooking from './pages/ConfirmedBooking'
 import ConsultationDetail from './pages/customer/ConsultationDetail'
 import ConfirmedAppointment from './pages/customer/ConfirmedAppointment'
 import ProtectedRoute from './components/ProtectedRoute'
+import FloatingChatbot from './components/FloatingChatbot'
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/appointments" element={<Appointments />} />
         <Route path="/services" element={<Services />} />
         <Route path="/my-bookings" element={<MyBookings />} />
+        <Route path="/chat" element={<Navigate to="/" replace />} />
         <Route path="/service/:serviceId" element={<ServiceDetail />} />
         <Route path="/confirmed-booking/:bookingId" element={<ConfirmedBooking />} />
         <Route path="/consultation/:consultationId" element={<ConsultationDetail />} />
@@ -62,6 +64,7 @@ function App() {
           </ProtectedRoute>
         } />
       </Routes>
+      <FloatingChatbot />
     </div>
   )
 }
