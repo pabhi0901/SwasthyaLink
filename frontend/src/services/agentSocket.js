@@ -2,10 +2,25 @@ import { io } from 'socket.io-client';
 
 let agentSocket = null;
 
+export const getAgentUrl = () => {
+  const envUrl = import.meta.env.VITE_AGENT_URL;
+  if (envUrl && !envUrl.includes('localhost')) {
+    return envUrl.replace(/\/$/, '');
+  }
+  if (
+    typeof window !== 'undefined' &&
+    window.location.hostname !== 'localhost' &&
+    window.location.hostname !== '127.0.0.1'
+  ) {
+    return 'https://swasthyalink-agent.onrender.com';
+  }
+  return (envUrl || 'http://localhost:5005').replace(/\/$/, '');
+};
+
 export const initAgentSocket = () => {
   if (agentSocket) return agentSocket;
 
-  const agentUrl = import.meta.env.VITE_AGENT_URL || 'http://localhost:5005';
+  const agentUrl = getAgentUrl();
   const token = localStorage.getItem('authToken');
   agentSocket = io(agentUrl, {
     withCredentials: true,
@@ -36,8 +51,8 @@ export const initAgentSocket = () => {
   return agentSocket;
 };
 
-export const connectAgentSocket = () => {
-  const token = localStorage.getItem('authToken');
+export const connectAgentSocket = (explicitToken) => {
+  const token = explicitToken || localStorage.getItem('authToken');
   if (!agentSocket) {
     agentSocket = initAgentSocket();
   }

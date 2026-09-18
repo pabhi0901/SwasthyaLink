@@ -24,10 +24,29 @@ import {
   FiXCircle,
 } from 'react-icons/fi';
 import { HiSparkles } from 'react-icons/hi2';
-import { connectAgentSocket, getAgentSocket } from '../services/agentSocket';
+import { connectAgentSocket, getAgentSocket, getAgentUrl } from '../services/agentSocket';
 
-const AGENT_API_URL = import.meta.env.VITE_AGENT_URL || 'http://localhost:5005';
-const MAIN_API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5003';
+const getEffectiveAgentApiUrl = () => {
+  return getAgentUrl();
+};
+
+const getEffectiveMainApiUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (envUrl && !envUrl.includes('localhost')) {
+    return envUrl.replace(/\/$/, '');
+  }
+  if (
+    typeof window !== 'undefined' &&
+    window.location.hostname !== 'localhost' &&
+    window.location.hostname !== '127.0.0.1'
+  ) {
+    return 'https://swasthyalink.onrender.com';
+  }
+  return (envUrl || 'http://localhost:5003').replace(/\/$/, '');
+};
+
+const AGENT_API_URL = getEffectiveAgentApiUrl();
+const MAIN_API_URL = getEffectiveMainApiUrl();
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem('authToken');
@@ -96,6 +115,7 @@ export default function AgentChat() {
             localStorage.setItem('authToken', res.data.token);
           }
           setCurrentUser(res.data.user);
+          connectAgentSocket(res.data?.token);
         } else {
           navigate('/login?redirect=/chat');
         }
