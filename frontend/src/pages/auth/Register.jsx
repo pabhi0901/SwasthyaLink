@@ -52,6 +52,11 @@ const Register = () => {
       return
     }
 
+    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(formData.password)) {
+      setError('Password must contain at least one uppercase letter, one lowercase letter, and one number (e.g. Abhi1234)')
+      return
+    }
+
     if (!/^[0-9]{10}$/.test(formData.phone)) {
       setError('Please provide a valid 10-digit phone number')
       return
@@ -60,8 +65,10 @@ const Register = () => {
     setIsLoading(true)
     setError('')
 
+    const apiUrl = import.meta.env.VITE_API_URL || (typeof window !== 'undefined' && window.location.hostname !== 'localhost' ? 'https://swasthyalink.onrender.com' : 'http://localhost:5003');
+
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
+      const response = await axios.post(`${apiUrl}/api/auth/register`, {
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
@@ -87,7 +94,15 @@ const Register = () => {
       }
     } catch (err) {
       console.error('Registration error:', err)
-      const serverMessage = err.response?.data?.message || err.response?.data?.mess || err.message || 'An error occurred. Please try again.'
+      const firstErrorMsg =
+        err.response?.data?.errors?.[0]?.message ||
+        err.response?.data?.errors?.[0]?.msg;
+      const serverMessage =
+        firstErrorMsg ||
+        err.response?.data?.message ||
+        err.response?.data?.mess ||
+        err.message ||
+        'An error occurred. Please try again.';
       setError(serverMessage)
     } finally {
       setIsLoading(false)
