@@ -16,7 +16,11 @@ const llm = new ChatGoogleGenerativeAI({
   apiKey: process.env.GOOGLE_API_KEY,
 });
 
-const BACKEND_URL = (process.env.BACKEND_URL || process.env.MAIN_API_URL || 'http://localhost:5003').replace(/\/$/, '');
+const BACKEND_URL = (
+  process.env.BACKEND_URL ||
+  process.env.MAIN_API_URL ||
+  (process.env.NODE_ENV === 'production' || process.env.RENDER || process.env.PORT ? 'https://swasthyalink.onrender.com' : 'http://localhost:5003')
+).replace(/\/$/, '');
 
 export const intent = async (State) => {
   const { user_message, messages_history } = State;
