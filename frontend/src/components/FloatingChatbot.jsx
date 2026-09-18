@@ -461,12 +461,11 @@ export default function FloatingChatbot() {
   };
 
   const initWelcomeMessage = () => {
-    const displayName = currentUser?.name ? currentUser.name.split(' ')[0] : 'Abhi';
     setMessages([
       {
         _id: 'welcome-msg',
         role: 'ai',
-        message: `Hi ${displayName}! 👋\nI'm SwasthyaLink AI, your health assistant.\nHow can I help you today?`,
+        message: `Hello! 👋\nI'm SwasthyaLink AI, your personal health assistant.\nHow can I help you today?`,
         createdAt: new Date().toISOString(),
       },
     ]);
@@ -571,6 +570,13 @@ export default function FloatingChatbot() {
   const handleSendMessage = async (textCustom = null) => {
     const textToSend = (textCustom || inputMessage).trim();
     if (!textToSend || aiThinking) return;
+
+    // Redirect to login if user is not logged in
+    if (!currentUser) {
+      setIsOpen(false);
+      navigate('/login');
+      return;
+    }
 
     const socket = getAgentSocket();
     if (!socket) return;

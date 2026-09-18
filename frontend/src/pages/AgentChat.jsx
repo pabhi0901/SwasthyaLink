@@ -441,6 +441,11 @@ export default function AgentChat() {
     const textToSend = (customMessage || inputMessage).trim();
     if (!textToSend || aiThinking) return;
 
+    if (!currentUser) {
+      navigate('/login?redirect=/chat');
+      return;
+    }
+
     const socket = getAgentSocket();
     if (!socket) {
       alert('Socket connection is not ready. Please refresh the page.');
