@@ -53,7 +53,7 @@ const Register = () => {
     }
 
     if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(formData.password)) {
-      setError('Password must contain at least one uppercase letter, one lowercase letter, and one number (e.g. Abhi1234)')
+      setError('Password must contain at least one uppercase letter, one lowercase letter, and one number (e.g. Abcd1234)')
       return
     }
 

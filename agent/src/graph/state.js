@@ -58,21 +58,22 @@ export  const State = z.object({
   appointment_booking_essentials: z.object({
     date: z.date(),
 
-    startHour: z.number().min(0).max(23),
-    startMinute: z.number().min(0).max(59),
-
-    appointmentId: z.string(),
-
-    availableSlots: z.array(
-      z.object({
+    available_appointment: z.array(
+      {
         _id: z.string(),
-        startMinute: z.number(),
-        endMinute: z.number()
-      })
-    ),
+        availableSlots: z.array(
+          z.object({
+            _id: z.string(),
+            startMinute: z.number(),
+            endMinute: z.number()
+          })
+        ).optional()
+      }
+    ).optional(),
 
-    selectedSlotId: z.string(),
-
+    selectedAppointmentId: z.string().optional(),
+    selectedSlotId: z.string().optional(),
+ 
     paymentId: z.string().optional()
   }).optional()
 }); 
